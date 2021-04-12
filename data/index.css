@@ -64,6 +64,48 @@ h1 {
   background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
 }
 
+#ledy {
+  position: relative;
+  width: 5em;
+  height: 5em;
+  border: 2px solid #000;
+  border-radius: 2.5em;
+  background-image: radial-gradient(farthest-corner at 50% 20%, #b0b300 0%, #333000 100%);
+  box-shadow: 0 0.5em 1em rgba(100, 102, 0, 0.3);
+}
+#ledy.on {
+  background-image: radial-gradient(farthest-corner at 50% 75%, rgb(255, 230, 0) 0%, #999600 100%);
+  box-shadow: 0 1em 1.5em rgba(238, 255, 0, 0.5);
+}
+
+#ledg {
+  position: relative;
+  width: 5em;
+  height: 5em;
+  border: 2px solid #000;
+  border-radius: 2.5em;
+  background-image: radial-gradient(farthest-corner at 50% 20%, #00b309 0%, #00330f 100%);
+  box-shadow: 0 0.5em 1em rgba(0, 102, 0, 0.3);
+}
+#ledg.on {
+  background-image: radial-gradient(farthest-corner at 50% 75%, rgb(9, 255, 0) 0%, #009900 100%);
+  box-shadow: 0 1em 1.5em rgba(0, 255, 0, 0.5);
+}
+
+#ledb {
+  position: relative;
+  width: 5em;
+  height: 5em;
+  border: 2px solid #000;
+  border-radius: 2.5em;
+  background-image: radial-gradient(farthest-corner at 50% 20%, #0003b3 0%, #000133 100%);
+  box-shadow: 0 0.5em 1em rgba(0, 2, 102, 0.3);
+}
+#ledb.on {
+  background-image: radial-gradient(farthest-corner at 50% 75%, rgb(4, 0, 255) 0%, #030099 100%);
+  box-shadow: 0 1em 1.5em rgba(0, 4, 255, 0.5);
+}
+
 button {
   padding: .5em .75em;
   font-size: 1.2rem;

@@ -9,6 +9,7 @@
 #include <Arduino.h>
 #include <SPIFFS.h>
 #include <WiFi.h>
+#include <DNSServer.h>
 #include <ESPAsyncWebServer.h>
 #include <ArduinoJson.h>
 
@@ -17,8 +18,10 @@
 // ----------------------------------------------------------------------------
 
 #define LED_PIN   26
+#define LED_BUILTIN 33
 #define BTN_PIN   22
 #define HTTP_PORT 80
+#define DNS_PORT 53
 
 // ----------------------------------------------------------------------------
 // Definition of global constants
@@ -30,6 +33,9 @@ const uint8_t DEBOUNCE_DELAY = 10; // in milliseconds
 // WiFi credentials
 const char *WIFI_SSID = "YOUR_WIFI_SSID";
 const char *WIFI_PASS = "YOUR_WIFI_PASSWORD";
+
+const char* ssid     = "ESP32-Access-Point";
+const char* password = "123456789";
 
 // ----------------------------------------------------------------------------
 // Definition of the LED component
@@ -103,6 +109,7 @@ Button button      = { BTN_PIN, HIGH, 0, 0 };
 
 AsyncWebServer server(HTTP_PORT);
 AsyncWebSocket ws("/ws");
+DNSServer dnsServer;
 
 // ----------------------------------------------------------------------------
 // SPIFFS initialization
@@ -123,14 +130,31 @@ void initSPIFFS() {
 // ----------------------------------------------------------------------------
 
 void initWiFi() {
-  WiFi.mode(WIFI_STA);
+  /*WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_SSID, WIFI_PASS);
   Serial.printf("Trying to connect [%s] ", WiFi.macAddress().c_str());
   while (WiFi.status() != WL_CONNECTED) {
       Serial.print(".");
       delay(500);
   }
-  Serial.printf(" %s\n", WiFi.localIP().toString().c_str());
+  Serial.printf(" %s\n", WiFi.localIP().toString().c_str());*/
+   WiFi.disconnect();   //added to start with the wifi off, avoid crashing
+   3
+   
+   
+   
+   
+   WiFi.mode(WIFI_OFF); //added to start with the wifi off, avoid crashing
+   WiFi.mode(WIFI_AP);
+   WiFi.softAP(ssid, password);
+
+  IPAddress IP = WiFi.softAPIP();
+  Serial.print("AP IP address: ");
+  Serial.println(IP); 
+
+  // if DNSServer is started with "*" for domain name, it will reply with
+  // provided IP to all DNS request
+  dnsServer.start(DNS_PORT, "*", IP);
 }
 
 // ----------------------------------------------------------------------------
